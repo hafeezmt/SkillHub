@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #07261f;
+  --ink-soft: #0e3b30;
+  --teal: #0f766e;
+  --teal-hover: #0d5f59;
+  --coral: #e85d04;
+  --mist: #f3f7f5;
+  --paper: #ffffff;
+  --muted: #5c6b66;
+  --line: #d5e0db;
+  --success: #15803d;
+  --danger: #b91c1c;
+  --background: var(--mist);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-teal: var(--teal);
+  --color-teal-hover: var(--teal-hover);
+  --color-coral: var(--coral);
+  --color-mist: var(--mist);
+  --color-paper: var(--paper);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-figtree);
+  --font-display: var(--font-outfit);
+}
+
+body {
+  background: var(--mist);
+  color: var(--ink);
+  font-family: var(--font-figtree), "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+
+.font-display {
+  font-family: var(--font-outfit), "Segoe UI", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+a {
+  text-decoration: none;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--teal) 25%, white);
+}
