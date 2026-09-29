@@ -34,6 +34,8 @@ export type Course = {
   status: CourseStatus;
   featured: boolean;
   icon: "va" | "design" | "marketing" | "content";
+  image: string;
+  imageAlt: string;
   skills: string[];
   modules: string[];
   lessons: Lesson[];
@@ -56,6 +58,8 @@ export const courses: Course[] = [
     status: "available",
     featured: true,
     icon: "va",
+    image: "/images/skill-virtual-assistance.png",
+    imageAlt: "Young woman learning virtual assistance skills on a laptop",
     skills: [
       "Email management",
       "Scheduling",
@@ -268,6 +272,8 @@ export const courses: Course[] = [
     status: "coming-soon",
     featured: false,
     icon: "design",
+    image: "/images/skill-graphic-design.png",
+    imageAlt: "Young man practising graphic design on a laptop",
     skills: ["Layout basics", "Typography", "Brand visuals", "Social creatives"],
     modules: ["Design foundations", "Tools & workflow", "Client projects"],
     lessons: [],
@@ -288,6 +294,8 @@ export const courses: Course[] = [
     status: "coming-soon",
     featured: false,
     icon: "marketing",
+    image: "/images/skill-digital-marketing.png",
+    imageAlt: "Young woman reviewing digital marketing analytics on laptop and phone",
     skills: ["Social strategy", "Content planning", "Ads basics", "Analytics"],
     modules: ["Marketing fundamentals", "Channel strategy", "Campaign project"],
     lessons: [],
@@ -308,6 +316,8 @@ export const courses: Course[] = [
     status: "coming-soon",
     featured: false,
     icon: "content",
+    image: "/images/skill-content-creation.png",
+    imageAlt: "Young content creator filming with a smartphone on a desk tripod",
     skills: ["Scripting", "Short-form video", "Editing basics", "Publishing cadence"],
     modules: ["Creative foundations", "Production", "Growth systems"],
     lessons: [],

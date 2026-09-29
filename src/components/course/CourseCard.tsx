@@ -1,21 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
-import {
-  BriefcaseBusiness,
-  Clapperboard,
-  Megaphone,
-  Palette,
-  ArrowRight,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import type { Course } from "@/lib/data";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
-
-const icons = {
-  va: BriefcaseBusiness,
-  design: Palette,
-  marketing: Megaphone,
-  content: Clapperboard,
-};
 
 export function CourseCard({
   course,
@@ -24,7 +12,6 @@ export function CourseCard({
   course: Course;
   compact?: boolean;
 }) {
-  const Icon = icons[course.icon];
   const available = course.status === "available";
 
   return (
@@ -34,22 +21,26 @@ export function CourseCard({
         course.featured && "ring-2 ring-teal/30",
       )}
     >
-      <div className="relative bg-gradient-to-br from-ink via-ink-soft to-[#134E4A] px-5 py-8 text-white">
-        <div className="absolute inset-0 opacity-30 [background-image:radial-gradient(circle_at_20%_20%,#5EEAD4_0,transparent_40%),radial-gradient(circle_at_80%_70%,#E85D04_0,transparent_35%)]" />
-        <div className="relative flex items-start justify-between gap-3">
-          <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm">
-            <Icon size={26} strokeWidth={1.6} />
-          </div>
-          {course.featured && (
-            <span className="rounded-full bg-coral px-3 py-1 text-[11px] font-semibold uppercase tracking-wide">
-              Featured
-            </span>
-          )}
+      <div className="relative h-52 overflow-hidden">
+        <Image
+          src={course.image}
+          alt={course.imageAlt}
+          fill
+          className="object-cover transition duration-300 group-hover:scale-[1.03]"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/15 to-transparent" />
+        {course.featured && (
+          <span className="absolute left-3 top-3 rounded-full bg-coral px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">
+            Featured
+          </span>
+        )}
+        <div className="absolute bottom-3 left-3 right-3 text-white">
+          <h3 className="font-display text-xl font-bold">{course.name}</h3>
+          <p className="mt-0.5 text-sm text-white/80">
+            {course.level} · {course.duration}
+          </p>
         </div>
-        <h3 className="relative mt-5 font-display text-xl font-bold">{course.name}</h3>
-        <p className="relative mt-1 text-sm text-white/70">
-          {course.level} · {course.duration}
-        </p>
       </div>
 
       <div className="flex flex-1 flex-col p-5">
@@ -89,22 +80,30 @@ export function CourseCard({
 export function CourseIconRow({ courses }: { courses: Course[] }) {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {courses.map((course) => {
-        const Icon = icons[course.icon];
-        return (
-          <Link
-            key={course.id}
-            href={course.status === "available" ? `/courses/${course.slug}` : "/courses"}
-            className="rounded-xl border border-line bg-paper p-5 transition hover:-translate-y-0.5 hover:border-teal/40 hover:shadow-[0_8px_24px_rgba(7,38,31,0.08)]"
-          >
-            <Icon className="text-teal" size={28} strokeWidth={1.6} />
-            <p className="mt-4 font-display text-lg font-semibold text-ink">{course.name}</p>
+      {courses.map((course) => (
+        <Link
+          key={course.id}
+          href={course.status === "available" ? `/courses/${course.slug}` : "/courses"}
+          className="group overflow-hidden rounded-xl border border-line bg-paper transition hover:-translate-y-0.5 hover:border-teal/40 hover:shadow-[0_8px_24px_rgba(7,38,31,0.08)]"
+        >
+          <div className="relative h-40 overflow-hidden">
+            <Image
+              src={course.image}
+              alt={course.imageAlt}
+              fill
+              className="object-cover transition duration-300 group-hover:scale-[1.04]"
+              sizes="(max-width: 768px) 50vw, 25vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/55 to-transparent" />
+          </div>
+          <div className="p-4">
+            <p className="font-display text-lg font-semibold text-ink">{course.name}</p>
             <p className="mt-1 text-sm text-muted">
               {course.status === "available" ? "Open for enrollment" : "Coming in Version 2"}
             </p>
-          </Link>
-        );
-      })}
+          </div>
+        </Link>
+      ))}
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowRight, Clock3, Signal } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -33,34 +34,49 @@ export default async function CourseDetailPage({
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-      <div className="overflow-hidden rounded-2xl bg-ink px-6 py-10 text-white sm:px-10">
-        <p className="text-sm uppercase tracking-[0.08em] text-white/50">
-          {course.featured ? "Featured course" : "Course"}
-        </p>
-        <h1 className="mt-3 font-display text-3xl font-bold sm:text-5xl">
-          {course.name}
-          {available ? " — Beginner Course" : ""}
-        </h1>
-        <p className="mt-4 max-w-2xl text-white/70">{course.description}</p>
-        <div className="mt-6 flex flex-wrap gap-4 text-sm text-white/80">
-          <span className="inline-flex items-center gap-2">
-            <Clock3 size={16} strokeWidth={1.75} /> {course.duration}
-          </span>
-          <span className="inline-flex items-center gap-2">
-            <Signal size={16} strokeWidth={1.75} /> {course.level}
-          </span>
-          <span className="font-semibold text-[#5EEAD4]">{course.price}</span>
-        </div>
-        <div className="mt-8">
-          {available ? (
-            <Button href="/signup" variant="coral" size="lg">
-              Enroll in Course <ArrowRight size={18} strokeWidth={1.75} />
-            </Button>
-          ) : (
-            <p className="rounded-lg bg-white/10 px-4 py-3 text-sm text-white/80">
-              This course opens in Version 2. Start with Virtual Assistance today.
+      <div className="overflow-hidden rounded-2xl bg-ink text-white">
+        <div className="grid lg:grid-cols-2">
+          <div className="relative min-h-[280px] sm:min-h-[360px]">
+            <Image
+              src={course.image}
+              alt={course.imageAlt}
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+            <div className="absolute inset-0 bg-ink/30" />
+          </div>
+          <div className="px-6 py-10 sm:px-10">
+            <p className="text-sm uppercase tracking-[0.08em] text-white/50">
+              {course.featured ? "Featured course" : "Course"}
             </p>
-          )}
+            <h1 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
+              {course.name}
+              {available ? " — Beginner Course" : ""}
+            </h1>
+            <p className="mt-4 max-w-2xl text-white/70">{course.description}</p>
+            <div className="mt-6 flex flex-wrap gap-4 text-sm text-white/80">
+              <span className="inline-flex items-center gap-2">
+                <Clock3 size={16} strokeWidth={1.75} /> {course.duration}
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <Signal size={16} strokeWidth={1.75} /> {course.level}
+              </span>
+              <span className="font-semibold text-[#5EEAD4]">{course.price}</span>
+            </div>
+            <div className="mt-8">
+              {available ? (
+                <Button href="/signup" variant="coral" size="lg">
+                  Enroll in Course <ArrowRight size={18} strokeWidth={1.75} />
+                </Button>
+              ) : (
+                <p className="rounded-lg bg-white/10 px-4 py-3 text-sm text-white/80">
+                  This course opens in Version 2. Start with Virtual Assistance today.
+                </p>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
